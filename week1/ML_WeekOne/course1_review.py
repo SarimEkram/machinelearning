@@ -73,6 +73,14 @@ def gradient_descent_linear(X, y, w_in, b_in, alpha, num_iters):
 
     return w, b
 
-w_trained, b_trained = gradient_descent_linear(X_lin, y_lin, np.zeros(3), 0.0, alpha=1e-5, num_iters=10000)
-print("Trained w:", w_trained, "b:", b_trained)
-print("Final cost:", compute_cost_linear(X_lin, y_lin, w_trained, b_trained))
+
+def zscore_normalize(X):
+    mu = np.mean(X, axis=0)
+    sigma = np.std(X, axis=0)
+    X_norm = (X - mu) / sigma
+    return X_norm, mu, sigma
+
+
+X_norm, mu, sigma = zscore_normalize(X_lin)
+w, b = gradient_descent_linear(X_norm, y_lin, np.zeros(3), 0.0, alpha=0.1, num_iters=1000)
+print("cost:", compute_cost_linear(X_norm, y_lin, w, b))
