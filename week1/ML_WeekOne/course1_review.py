@@ -34,9 +34,25 @@ def compute_cost_linear(X, y, w, b):
     cost = 0
     for i in range(m):
         f_wb = predict_single(X[i], w, b)
-        cost += (f_wb - y[i])**2
-    cost = cost / (2*m)
+        cost += (f_wb - y[i]) ** 2
+    cost = cost / (2 * m)
     return cost
 
 
-print(compute_cost_linear(X_lin, y_lin, np.zeros(3), 0.0))
+def compute_gradient_linear(X, y, w, b):
+    m, n = X.shape
+    dj_dw = np.zeros(n)  # one gradient per feature (array of 3 zeros here)
+    dj_db = 0.
+
+    for i in range(m):
+        f_wb = predict_single(X[i], w, b)
+        error = (f_wb - y[i])
+
+        for j in range(n):
+            dj_dw[j] += error * X[i, j]
+        dj_db += error
+
+    dj_dw = dj_dw / m
+    dj_db = dj_db / m
+
+    return dj_dw, dj_db
