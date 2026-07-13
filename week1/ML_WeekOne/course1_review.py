@@ -56,3 +56,6 @@ def compute_gradient_linear(X, y, w, b):
     dj_db = dj_db / m
 
     return dj_dw, dj_db
+
+
+print(compute_gradient_linear(X_lin, y_lin, np.zeros(3), 0.0))
