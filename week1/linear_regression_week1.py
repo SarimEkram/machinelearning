@@ -166,6 +166,7 @@ print(f"Predicted price for a 1200 sqft house: ${predicted_price:.0f} thousand d
 # ============================================================
 plt.scatter(x_train, y_train, marker='x', c='r', label='Actual Values')
 tmp_f_wb = compute_model_output(x_train, w_final, b_final)
+
 plt.plot(x_train, tmp_f_wb, c='b', label='Our Prediction')
 plt.title("Housing Prices")
 plt.ylabel('Price (in 1000s of dollars)')
