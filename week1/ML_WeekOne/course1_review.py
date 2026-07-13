@@ -72,3 +72,7 @@ def gradient_descent_linear(X, y, w_in, b_in, alpha, num_iters):
             print(f"Iteration {i}: cost {cost}")
 
     return w, b
+
+w_trained, b_trained = gradient_descent_linear(X_lin, y_lin, np.zeros(3), 0.0, alpha=1e-5, num_iters=10000)
+print("Trained w:", w_trained, "b:", b_trained)
+print("Final cost:", compute_cost_linear(X_lin, y_lin, w_trained, b_trained))
