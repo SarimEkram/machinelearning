@@ -58,4 +58,17 @@ def compute_gradient_linear(X, y, w, b):
     return dj_dw, dj_db
 
 
-print(compute_gradient_linear(X_lin, y_lin, np.zeros(3), 0.0))
+def gradient_descent_linear(X, y, w_in, b_in, alpha, num_iters):
+    w = w_in.copy()  # copy so we don't modify the original
+    b = b_in
+
+    for i in range(num_iters):
+        dj_dw, dj_db = compute_gradient_linear(X, y, w, b)
+        w = w - alpha * dj_dw
+        b = b - alpha * dj_db
+
+        if i % 100 == 0:
+            cost = compute_cost_linear(X, y, w, b)
+            print(f"Iteration {i}: cost {cost}")
+
+    return w, b
