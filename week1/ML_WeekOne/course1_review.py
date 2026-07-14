@@ -85,3 +85,30 @@ def zscore_normalize(X):
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
 
+
+def compute_cost_logistic(X, y, w, b):
+    m = X.shape[0]
+
+    cost = 0
+    for i in range(m):
+        z = predict_single(X[i], w, b)
+        f = sigmoid(z)
+        cost += -y[i] * np.log(f) - (1 - y[i]) * np.log(1 - f)
+
+    return cost / m
+
+
+def compute_gradient_logistic(X, y, w, b):
+    m, n = X.shape
+    dj_dw = np.zeros(n)
+    dj_db = 0.
+
+    for i in range(m):
+        z = predict_single(X[i], w, b)
+        f = sigmoid(z)
+        for j in range(n):
+            dj_dw[j] += (f - y[i]) * X[i,j]
+
+        dj_db += f - y[i]
+
+    return dj_dw / m, dj_db / m
