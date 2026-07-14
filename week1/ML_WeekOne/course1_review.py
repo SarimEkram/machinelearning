@@ -126,3 +126,13 @@ def gradient_descent_logistic(X, y, w_in, b_in, alpha, num_iters):
             cost = compute_cost_logistic(X, y, w, b)           # <- logistic cost
             print(f"Iteration {i}: cost {cost}")
     return w, b
+
+
+def predict_logistic(X, w, b):
+    m = X.shape[0]
+    p = np.zeros(m)
+    for i in range(m):
+        z = predict_single(X[i], w, b)
+        f = sigmoid(z)
+        p[i] = f >= 0.5
+    return p
