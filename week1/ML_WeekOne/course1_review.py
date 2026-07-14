@@ -112,3 +112,17 @@ def compute_gradient_logistic(X, y, w, b):
         dj_db += f - y[i]
 
     return dj_dw / m, dj_db / m
+
+
+def gradient_descent_logistic(X, y, w_in, b_in, alpha, num_iters):
+    w = w_in.copy()
+    b = b_in
+    for i in range(num_iters):
+        dj_dw, dj_db = compute_gradient_logistic(X, y, w, b)   # <- logistic gradient
+        w = w - alpha * dj_dw
+        b = b - alpha * dj_db
+
+        if i % 1000 == 0:
+            cost = compute_cost_logistic(X, y, w, b)           # <- logistic cost
+            print(f"Iteration {i}: cost {cost}")
+    return w, b
