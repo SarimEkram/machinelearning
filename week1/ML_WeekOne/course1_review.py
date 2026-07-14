@@ -81,6 +81,7 @@ def zscore_normalize(X):
     return X_norm, mu, sigma
 
 
-X_norm, mu, sigma = zscore_normalize(X_lin)
-w, b = gradient_descent_linear(X_norm, y_lin, np.zeros(3), 0.0, alpha=0.1, num_iters=1000)
-print("cost:", compute_cost_linear(X_norm, y_lin, w, b))
+# logistic regression
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
